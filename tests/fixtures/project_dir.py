@@ -20,5 +20,6 @@ def project_dir() -> Path:
     }
     generated_repo_dir: Path = generate_project(template_values=template_values)
     initialize_git_repo(repo_dir=generated_repo_dir)
+    subprocess.run(["make", "lint-ci"], cwd=generated_repo_dir, check=False)
     yield generated_repo_dir
     shutil.rmtree(path=generated_repo_dir)
